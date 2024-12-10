@@ -1,0 +1,104 @@
+:root {
+  --color-primary: #ffa500;
+  --color-secondary: #fa8c16;
+  --color-bg: #f7f7f7;
+  --color-border: #d9d9d9;
+  --color-placeholder: rgba(166, 168, 185, 1);
+  --color-hover: #e8e8e8;
+  --color-white: #ffffff;
+  --color-gray: #333;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.ant-layout-header {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-hover);
+}
+
+.ant-layout-content {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.ant-form-item-label > label {
+  font-weight: bold;
+  color: var(--color-gray);
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.ant-select-arrow {
+  color: var(--color-primary) !important;
+  transform: scale(1.2);
+}
+
+.ant-select {
+  height: 48px; 
+}
+
+.ant-select-selector {
+  height: 100% !important;
+  line-height: 48px; 
+}
+
+.custom-input {
+  height: 48px; 
+  padding: 0 8px; 
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  line-height: 48px; 
+}
+
+.switch-container {
+  display: flex;
+  width: 100%; 
+  padding: 14px 0;
+  justify-content: flex-end;
+}
+
+.switch-custom {
+  background-color: var(--color-secondary) !important; 
+}
+
+.title-account {
+  margin-right: 8px;
+}
+
+.custom-input-money {
+  height: 48px; 
+  padding: 0 8px; 
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  line-height: 48px; 
+}
+
+.transfer-money__input {
+  height: 150px !important;
+  padding: 12px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px;
+  font-size: 14px; 
+  resize: none; 
+}
+
+.ant-select .ant-select-selection-placeholder {
+  color: var(--color-placeholder) !important;
+  font-weight: 500;
+}
+
+.custom-input::placeholder {
+  color: var(--color-placeholder) !important; 
+  font-weight: 500 !important; 
+}
+
+.ant-input::placeholder {
+  color: var(--color-placeholder) !important;
+  font-weight: 500 !important; 
+}
