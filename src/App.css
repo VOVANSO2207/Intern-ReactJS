@@ -1,6 +1,8 @@
 /* Biến chung */
 :root {
   --primary-color: #e62e90;
+  --color-primary: #ffa500;
+  --color-secondary: #fa8c16;
 }
 
 body {
