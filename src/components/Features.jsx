@@ -7,7 +7,6 @@ const featuresData = [
   { icon: '🛒', text: 'features.cashless', highlightPart: 'features.cashless_highlight' },
 ];
 
-// Hàm tách và highlight cụm văn bản
 const highlightText = (fullText, highlightPart) => {
   const index = fullText.indexOf(highlightPart);
   return (

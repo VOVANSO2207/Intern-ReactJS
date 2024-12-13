@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Card,
-  Typography,
-  Radio,
-  Button,
-  Divider,
-  Space,
-  Alert,
-  message,
-  QRCode,
-  Modal
-} from 'antd';
-import {
-  BankOutlined,
-  WalletOutlined,
-  CreditCardOutlined,
-  MobileOutlined,
-  QrcodeOutlined,
-  ClockCircleOutlined,
-  CheckCircleOutlined
+import {Card, Typography, Radio, Button, Divider, Space, Alert, message, QRCode, Modal} from 'antd';
+import {BankOutlined, WalletOutlined, CreditCardOutlined, MobileOutlined, QrcodeOutlined, ClockCircleOutlined, CheckCircleOutlined
 } from '@ant-design/icons';
-
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 const { Title, Text, Paragraph } = Typography;
 
 const PAYMENT_METHODS = [
@@ -76,31 +59,32 @@ const PAYMENT_METHODS = [
   }
 ];
 
-const VNPayPaymentInterface = () => {
+const DetailPayment = () => {
+   const { t, i18n } = useTranslation(); 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [orderDetails, setOrderDetails] = useState(null);
   const [paymentStep, setPaymentStep] = useState('method-selection');
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [qrCodeData, setQRCodeData] = useState(null);
   const [countdownTime, setCountdownTime] = useState(900);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchPaymentDetails = async () => {
       try {
         const mockOrderDetails = {
           transactionId: 'VNP-20241211-001',
           requestedAmount: 500000,
-          description: 'Thanh toán dịch vụ'
+          description: t('orderDetails.description')
         };
 
         setOrderDetails(mockOrderDetails);
       } catch (error) {
-        message.error('Không thể tải thông tin thanh toán');
+        message.error(t('errors.loadPaymentInfo'));
       }
     };
 
     fetchPaymentDetails();
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     if (paymentStep === 'qr-payment' && countdownTime > 0) {
@@ -165,6 +149,14 @@ const VNPayPaymentInterface = () => {
 
   const renderMethodSelectionStep = () => (
     <>
+      <Button
+        type="primary"
+        className='back-button test-number-3'
+        onClick={() => navigate('/')}
+       
+      >
+       {t('button.back')}
+      </Button>
       {orderDetails && (
         <Card
           type="inner"
@@ -175,16 +167,16 @@ const VNPayPaymentInterface = () => {
         >
           <div style={{ textAlign: 'center', marginBottom: 20 }}>
             <Title level={3} style={{ color: '#1890ff' }}>
-              Thanh Toán Sản Phẩm
+            {t('productPay')}
             </Title>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-            <Text strong>Mã giao dịch:</Text>
+            <Text strong>{t('transactionId')}:</Text>
             <Text code>{orderDetails.transactionId}</Text>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-            <Text strong>Số tiền thanh toán:</Text>
+            <Text strong>{t('paymentAmount')}:</Text>
             <Text strong style={{ color: '#f5222d' }}>
               {orderDetails.requestedAmount.toLocaleString()} VND
             </Text>
@@ -196,7 +188,7 @@ const VNPayPaymentInterface = () => {
       )}
 
       <Title level={4} style={{ marginBottom: 15 }}>
-        Chọn phương thức thanh toán
+      {t('selectPaymentMethod')}
       </Title>
 
       <Radio.Group
@@ -293,7 +285,7 @@ const VNPayPaymentInterface = () => {
               borderColor: '#fa8c16'
             }}
           >
-            Tiếp tục thanh toán
+           {t('continePayment')}
           </Button>
         </>
       )}
@@ -303,7 +295,7 @@ const VNPayPaymentInterface = () => {
   const renderQRPaymentStep = () => (
     <div style={{ textAlign: 'center' }}>
       <Title level={4} style={{ color: '#fa8c16', marginBottom: 20 }}>
-        Thanh Toán Bằng Mã QR
+      {t('qrPaymentTitle')}
       </Title>
 
       <Card
@@ -349,7 +341,7 @@ const VNPayPaymentInterface = () => {
           type="secondary"
           style={{ textAlign: 'center', marginBottom: 20 }}
         >
-          Vui lòng quét mã QR để hoàn tất thanh toán
+            {t('scanQRInstruction')}
         </Paragraph>
 
         <Button
@@ -363,7 +355,7 @@ const VNPayPaymentInterface = () => {
       </Card>
 
       <Modal
-        title="Thanh Toán Thành Công"
+        title={t('paymentSuccessTitle')}
         visible={countdownTime === 0}
         onOk={() => setPaymentStep('method-selection')}
         onCancel={() => setPaymentStep('method-selection')}
@@ -386,7 +378,7 @@ const VNPayPaymentInterface = () => {
             Số tiền: {paymentDetails?.requestedAmount.toLocaleString()} VND
           </Paragraph>
           <Paragraph type="secondary">
-            Mã giao dịch: {paymentDetails?.transactionId}
+          {t('transactionId')}: {paymentDetails?.transactionId}
           </Paragraph>
         </div>
       </Modal>
@@ -407,4 +399,4 @@ const VNPayPaymentInterface = () => {
   );
 };
 
-export default VNPayPaymentInterface;
+export default DetailPayment;

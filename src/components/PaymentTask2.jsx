@@ -3,12 +3,16 @@ import { Layout, Button, Select, Switch, Tooltip, Row, Col, Form, Input } from '
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import '../public/assets/css/task2.css';
 import { BankOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 const { Header, Content } = Layout;
 const { Option } = Select;
 
-const MainLayoutTask2 = () => {
+const PaymentTask2 = () => {
+  const { t, i18n } = useTranslation(); 
   const [amount, setAmount] = useState('');
   const [bank, setBank] = useState(null);
+  const navigate = useNavigate();
 
   const handleQuickAmount = (value) => {
     setAmount(value);
@@ -22,20 +26,29 @@ const MainLayoutTask2 = () => {
   useEffect(() => {
     setMessage('Nguyen Ngoc Thach Chau chuyen tien');
   }, []);
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang); 
+  };
   return (
     <Layout>
       <Content style={{ padding: '20px' }}>
         <Row gutter={[16, 16]}>
-          {/* Cột 6 để trống */}
-          <Col span={12}></Col>
+          <Button
+            type="primary"
+            className='back-button'
+            onClick={() => navigate('/')}
 
-          {/* Cột 4: MainLayoutTask2 */}
+          >
+            {t('button.back')}
+          </Button>
+        
+          <Col span={12}></Col>
           <Col span={12}>
-            <Header style={{ backgroundColor: '#fff', fontWeight: 'bold', textAlign: 'left', padding: '0' }}>CHUYỂN TIỀN ĐẾN</Header>
+            <Header style={{ backgroundColor: '#fff', fontWeight: 'bold', textAlign: 'left', padding: '0' }}>   {t('headerPay')}</Header>
             <Form layout="vertical">
               <Form.Item>
                 <Select
-                  placeholder="Chọn ngân hàng"
+                  placeholder={t('select_bank')}
                   value={bank || undefined}
                   onChange={(value) => setBank(value)}
                   style={{ width: '100%', textAlign: 'left' }}
@@ -48,20 +61,20 @@ const MainLayoutTask2 = () => {
               </Form.Item>
 
               <Input
-                placeholder="Số tài khoản"
+                placeholder={t('account_number')}
                 className="custom-input"
                 style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '4px' }}
                 suffix={<BankOutlined style={{ color: 'orange', fontSize: '18px' }} />}
               />
               <Input
-                placeholder="Tên người nhận"
+                placeholder={t('receiver_name')}
                 className="custom-input"
-                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '4px', marginTop:'24px'}}
-            
+                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '4px', marginTop: '24px' }}
+
               />
 
               <div className="switch-container">
-                <span className="title-account">Lưu tài khoản vào danh bạ</span>
+                <span className="title-account">{t('save_account')}</span>
                 <Switch
                   checked={switchChecked}
                   onChange={(checked) => setSwitchChecked(checked)}
@@ -72,7 +85,7 @@ const MainLayoutTask2 = () => {
               <div style={{ position: 'relative', marginBottom: '20px' }}>
                 <Input
                   className="custom-input-money"
-                  placeholder="Số tiền VND"
+                  placeholder={t('amount')}
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   style={{
@@ -128,7 +141,7 @@ const MainLayoutTask2 = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div style={{ position: 'relative' }}>
                 <Input.TextArea
                   className="transfer-money__input"
@@ -180,4 +193,4 @@ const MainLayoutTask2 = () => {
   );
 };
 
-export default MainLayoutTask2;
+export default PaymentTask2;
