@@ -233,20 +233,20 @@ const DetailPayment = () => {
 
           <Card
             type="inner"
-            title="Chi Tiết Thanh Toán"
+            title={t('paymentdetails')}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-              <Text>Số tiền yêu cầu</Text>
+              <Text>{t('amountrequested')}</Text>
               <Text strong>{orderDetails.requestedAmount.toLocaleString()} VND</Text>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-              <Text>Phí giao dịch</Text>
+              <Text>{t('transactionfee')}</Text>
               <Text strong style={{ color: '#faad14' }}>
                 {Math.round(orderDetails.requestedAmount * selectedMethod.fee).toLocaleString()} VND
               </Text>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-              <Text>Phí tạo lệnh</Text>
+              <Text>{t('ordercreationfee')}</Text>
               <Text strong style={{ color: '#faad14' }}>
                 10,000 VND
               </Text>

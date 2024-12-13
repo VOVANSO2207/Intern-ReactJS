@@ -15,6 +15,10 @@ const resources = {
       paymentSuccessTitle: "Payment Successful",
       transactionSuccessMessage: "Transaction Successful",
       amountPaid: "Amount: {{amount}} VND",
+      amountrequested: "Amount requested",
+      transactionfee: "Transaction fees",
+      ordercreationfee: "Order creation fee",
+      paymentdetails: "Payment Details",
   
       button: {
         back: "Back",
@@ -84,7 +88,10 @@ const resources = {
       paymentSuccessTitle: "Thanh Toán Thành Công",
       transactionSuccessMessage: "Giao dịch thành công",
       amountPaid: "Số tiền: {{amount}} VND",
-      
+      amountrequested: "Số tiền yêu cầu",
+      transactionfee: "Phí giao dịch",
+      ordercreationfee: "Phí tạo lệnh",
+      paymentdetails: "Chi Tiết Thanh Toán",
       button: {
         back: "Quay lại",
       },
